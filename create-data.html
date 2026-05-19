@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Data with Facade DB | Blog Pribadi Hazfi Febrianto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="subhero">
+    <nav class="topbar">
+      <span class="brand">Blog Pribadi</span>
+      <div class="nav-menu">
+  <a href="index.html" class="nav-link">Beranda</a>
+  <a href="framework.html" class="nav-link">Framework</a>
+  <a href="migration.html" class="nav-link">Migration</a>
+  <a href="controller.html" class="nav-link">Controller</a>
+  <a href="create-data.html" class="nav-link current">Create Data</a>
+  <a href="edit-delete.html" class="nav-link">Edit Delete</a>
+  <a href="eloquent.html" class="nav-link">Eloquent</a>
+</div>
+    </nav>
+
+    <div class="page-head">
+      <p class="eyebrow">Postingan Blog</p>
+      <h1>Create Data with Facade DB</h1>
+      <p class="lead">
+        Halaman ini berisi materi pembuatan data menggunakan Facade DB pada Laravel,
+        mulai dari form tambah data, validasi, sampai penggunaan old value pada input form.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section article-section">
+      <article class="post-card">
+        <div class="post-meta">
+          <span>Facade DB</span>
+          <span>Create Data</span>
+        </div>
+        <h3>Create Data dengan Laravel</h3>
+        <p>
+          Pada materi ini, saya mempelajari bagaimana membuat fitur tambah data menggunakan
+          <strong>Facade DB</strong>. Saya juga belajar menambahkan validasi dan mempertahankan
+          nilai input lama agar form lebih nyaman digunakan.
+        </p>
+
+        <div class="article-blocks">
+          <section class="article-block">
+            <p class="article-kicker">Studi Kasus 1</p>
+            <h4>Lakukan hal yang sama untuk tabel t_kelas. Buatlah tampilan form untuk menambahkan data kelas dan success/error message feedback-nya.</h4>
+            <p>
+              Pada studi kasus pertama, saya diminta membuat form untuk menambahkan data kelas
+              ke tabel <strong>t_kelas</strong>, lalu menambahkan pesan sukses dan error sebagai
+              feedback setelah proses input data dilakukan.
+            </p>
+
+            <div class="code-example">
+              <p class="code-title">Source code Form t_kelas</p>
+              <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Daftar Kelas SMKN 4&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container mt-4"&gt;
+    &lt;h2&gt;Daftar Kelas SMKN 4&lt;/h2&gt;
+
+    @if(session('success'))
+    &lt;p style="color:green; background:#d4edda; padding:10px;"&gt;
+        {{ session('success') }}
+    &lt;/p&gt;
+    @endif
+
+    @if(session('error'))
+    &lt;p style="color:red; background:#ffdede; padding:10px;"&gt;
+        {{ session('error') }}
+    &lt;/p&gt;
+    @endif
+
+    &lt;a href="{{ route('kelas.create') }}" class="btn btn-primary mb-3"&gt;Tambah Data&lt;/a&gt;
+
+    &lt;table class="table table-bordered"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;ID&lt;/th&gt;
+                &lt;th&gt;Nama Kelas&lt;/th&gt;
+                &lt;th&gt;Jurusan&lt;/th&gt;
+                &lt;th&gt;Lokasi Ruangan&lt;/th&gt;
+                &lt;th&gt;Nama Wali Kelas&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            @forelse ($data as $k)
+            &lt;tr&gt;
+                &lt;td&gt;{{ $k-&gt;id }}&lt;/td&gt;
+                &lt;td&gt;{{ $k-&gt;nama_kelas }}&lt;/td&gt;
+                &lt;td&gt;{{ $k-&gt;jurusan }}&lt;/td&gt;
+                &lt;td&gt;{{ $k-&gt;lokasi_ruangan }}&lt;/td&gt;
+                &lt;td&gt;{{ $k-&gt;nama_wali_kelas }}&lt;/td&gt;
+            &lt;/tr&gt;
+            @empty
+            &lt;tr&gt;
+                &lt;td colspan="5" class="text-center"&gt;Belum ada data kelas&lt;/td&gt;
+            &lt;/tr&gt;
+            @endforelse
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+
+            <figure class="article-figure">
+              <img
+                src="assets/create-facade-studi-1-result.png"
+                alt="Screenshot tampilan form t_kelas dengan tombol tambah data dan daftar kelas"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan daftar kelas dan tombol tambah data pada halaman <strong>t_kelas</strong>.
+              </figcaption>
+            </figure>
+
+            <div class="code-example">
+              <p class="code-title">Source code Message Feedback t_kelas</p>
+              <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Tambah Data Kelas&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container mt-4"&gt;
+    &lt;h2&gt;Form Tambah Data Kelas&lt;/h2&gt;
+
+    @if($errors-&gt;any())
+    &lt;div style="color:red; background:#ffdede; padding:10px; margin-bottom:10px;"&gt;
+        &lt;ul&gt;
+            @foreach($errors-&gt;all() as $error)
+                &lt;li&gt;{{ $error }}&lt;/li&gt;
+            @endforeach
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    @endif
+
+    &lt;form action="{{ route('kelas.store') }}" method="POST"&gt;
+        @csrf
+
+        &lt;div class="mb-3"&gt;
+            &lt;label&gt;Nama Kelas&lt;/label&gt;
+            &lt;input type="text" name="nama_kelas" class="form-control" placeholder="Contoh: XI RPL 2"&gt;
+        &lt;/div&gt;
+
+        &lt;div class="mb-3"&gt;
+            &lt;label&gt;Jurusan&lt;/label&gt;
+            &lt;input type="text" name="jurusan" class="form-control" placeholder="Contoh: Rekayasa Perangkat Lunak"&gt;
+        &lt;/div&gt;
+
+        &lt;div class="mb-3"&gt;
+            &lt;label&gt;Lokasi Ruangan&lt;/label&gt;
+            &lt;input type="text" name="lokasi_ruangan" class="form-control" placeholder="Contoh: Gedung B Lantai 2"&gt;
+        &lt;/div&gt;
+
+        &lt;div class="mb-3"&gt;
+            &lt;label&gt;Nama Wali Kelas&lt;/label&gt;
+            &lt;input type="text" name="nama_wali_kelas" class="form-control" placeholder="Contoh: Pak Budi"&gt;
+        &lt;/div&gt;
+
+        &lt;button type="submit" class="btn btn-primary"&gt;Simpan&lt;/button&gt;
+        &lt;a href="{{ route('kelas.index') }}" class="btn btn-secondary"&gt;Kembali&lt;/a&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+
+            <figure class="article-figure">
+              <img
+                src="assets/create-facade-studi-1-feedback.png"
+                alt="Screenshot tampilan message feedback pada form tambah data kelas"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan form tambah data kelas beserta message feedback ketika ada input yang belum sesuai.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Studi Kasus 2</p>
+            <h4>Implementasikan validasi untuk tabel t_kelas, coba tambahkan beberapa validasi yang berbeda selain yang sudah dijelaskan.</h4>
+            <p>
+              Pada studi kasus kedua, saya diminta menambahkan validasi yang lebih beragam
+              pada proses input data <strong>t_kelas</strong>. Tujuannya agar data yang masuk
+              lebih terkontrol dan sesuai aturan yang dibuat.
+            </p>
+
+            <div class="code-example">
+              <p class="code-title">Source code Validasi t_kelas di Controller</p>
+              <pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class KelasController extends Controller
+{
+    public function index()
+    {
+        $data = DB::table('t_kelas')-&gt;get();
+        return view('kelas.index', compact('data'));
+    }
+
+    public function create()
+    {
+        return view('kelas.create');
+    }
+
+    public function store(Request $request)
+    {
+        // VALIDASI
+        $request-&gt;validate([
+            'nama_kelas' =&gt; 'required|min:5|max:20',
+            'jurusan' =&gt; 'required|min:3',
+            'lokasi_ruangan' =&gt; 'required|max:10',
+            'nama_wali_kelas' =&gt; 'required|alpha_spaces'
+        ],[
+            'nama_kelas.required' =&gt; 'Nama kelas wajib diisi!',
+            'nama_kelas.min' =&gt; 'Nama kelas minimal 5 karakter!',
+            'nama_kelas.max' =&gt; 'Nama kelas maksimal 20 karakter!',
+
+            'jurusan.required' =&gt; 'Jurusan wajib diisi!',
+            'jurusan.min' =&gt; 'Jurusan minimal 3 huruf!',
+
+            'lokasi_ruangan.required' =&gt; 'Lokasi wajib diisi!',
+            'lokasi_ruangan.max' =&gt; 'Lokasi maksimal 10 karakter!',
+
+            'nama_wali_kelas.required' =&gt; 'Nama wali wajib diisi!',
+            'nama_wali_kelas.alpha' =&gt; 'Nama wali hanya huruf!'
+        ]);
+
+        // INSERT DATA
+        $status = DB::table('t_kelas')-&gt;insert([
+            'nama_kelas' =&gt; $request-&gt;nama_kelas,
+            'jurusan' =&gt; $request-&gt;jurusan,
+            'lokasi_ruangan' =&gt; $request-&gt;lokasi_ruangan,
+            'nama_wali_kelas' =&gt; $request-&gt;nama_wali_kelas,
+        ]);
+
+        // REDIRECT
+        if ($status) {
+            return redirect('/kelas')-&gt;with('success', 'Data berhasil ditambahkan!');
+        } else {
+            return redirect('/kelas')-&gt;with('error', 'Data gagal ditambahkan!');
+        }
+    }
+}</code></pre>
+            </div>
+
+            <div class="code-example">
+              <p class="code-title">Source code Validasi t_kelas di Views</p>
+              <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Tambah Data Kelas&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container mt-4"&gt;
+    &lt;h2&gt;Form Tambah Data Kelas&lt;/h2&gt;
+
+    @if($errors-&gt;any())
+    &lt;div style="color:red; background:#ffdede; padding:10px; margin-bottom:10px;"&gt;
+        &lt;ul&gt;
+            @foreach($errors-&gt;all() as $error)
+                &lt;li&gt;{{ $error }}&lt;/li&gt;
+            @endforeach
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    @endif
+
+    &lt;form action="{{ route('kelas.store') }}" method="POST"&gt;
+        @csrf
+
+        &lt;div class="mb-3"&gt;
+            &lt;label&gt;Nama Kelas&lt;/label&gt;
+            &lt;input type="text" name="nama_kelas" class="form-control" placeholder="Contoh: XI RPL 2"&gt;
+        &lt;/div&gt;
+
+        &lt;div class="mb-3"&gt;
+            &lt;label&gt;Jurusan&lt;/label&gt;
+            &lt;input type="text" name="jurusan" class="form-control" placeholder="Contoh: Rekayasa Perangkat Lunak"&gt;
+        &lt;/div&gt;
+
+        &lt;div class="mb-3"&gt;
+            &lt;label&gt;Lokasi Ruangan&lt;/label&gt;
+            &lt;input type="text" name="lokasi_ruangan" class="form-control" placeholder="Contoh: Gedung B Lantai 2"&gt;
+        &lt;/div&gt;
+
+        &lt;div class="mb-3"&gt;
+            &lt;label&gt;Nama Wali Kelas&lt;/label&gt;
+            &lt;input type="text" name="nama_wali_kelas" class="form-control" placeholder="Contoh: Pak Budi"&gt;
+        &lt;/div&gt;
+
+        &lt;button type="submit" class="btn btn-primary"&gt;Simpan&lt;/button&gt;
+        &lt;a href="{{ route('kelas.index') }}" class="btn btn-secondary"&gt;Kembali&lt;/a&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+
+            <figure class="article-figure">
+              <img
+                src="assets/create-facade-studi-2-result-fixed.png"
+                alt="Screenshot tampilan validasi form t_kelas"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan validasi pada form <strong>t_kelas</strong> ketika beberapa field belum memenuhi aturan yang dibuat.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Studi Kasus 3</p>
+            <h4>Implementasikan User's Old Value untuk input field jk dan golongan_darah</h4>
+            <p>
+              Pada studi kasus ketiga, saya mempelajari penggunaan <strong>old value</strong>
+              agar input yang sudah diisi pengguna tidak hilang saat form dikirim dan terjadi validasi.
+              Saya menerapkannya pada field nama, jenis kelamin, dan golongan darah.
+            </p>
+
+            <div class="code-example">
+              <p class="code-title">Source code pada views siswa/form</p>
+              <pre><code>@if(session('success'))
+    &lt;p style="color:green"&gt;
+        {{ session('success') }}
+    &lt;/p&gt;
+@endif
+
+&lt;form method="POST" action="/siswa/store"&gt;
+@csrf
+
+Nama:
+&lt;input type="text" name="nama" value="{{ old('nama') }}"&gt;&lt;br&gt;&lt;br&gt;
+
+Jenis Kelamin:
+&lt;input type="radio" name="jk" value="L" {{ old('jk') == 'L' ? 'checked' : '' }}&gt; L
+&lt;input type="radio" name="jk" value="P" {{ old('jk') == 'P' ? 'checked' : '' }}&gt; P
+&lt;br&gt;&lt;br&gt;
+
+Golongan Darah:
+&lt;select name="golongan_darah"&gt;
+&lt;option value=""&gt;-- Pilih --&lt;/option&gt;
+&lt;option value="A" {{ old('golongan_darah') == 'A' ? 'selected' : '' }}&gt;A&lt;/option&gt;
+&lt;option value="B" {{ old('golongan_darah') == 'B' ? 'selected' : '' }}&gt;B&lt;/option&gt;
+&lt;option value="AB" {{ old('golongan_darah') == 'AB' ? 'selected' : '' }}&gt;AB&lt;/option&gt;
+&lt;option value="O" {{ old('golongan_darah') == 'O' ? 'selected' : '' }}&gt;O&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;br&gt;&lt;br&gt;
+&lt;button type="submit"&gt;Simpan&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;hr&gt;
+
+&lt;h3&gt;Data Siswa&lt;/h3&gt;
+&lt;table border="1" cellpadding="8"&gt;
+    &lt;tr&gt;
+        &lt;th&gt;ID&lt;/th&gt;
+        &lt;th&gt;Nama&lt;/th&gt;
+        &lt;th&gt;JK&lt;/th&gt;
+        &lt;th&gt;Golongan Darah&lt;/th&gt;
+    &lt;/tr&gt;
+
+    @foreach($siswa as $s)
+    &lt;tr&gt;
+        &lt;td&gt;{{ $s-&gt;id }}&lt;/td&gt;
+        &lt;td&gt;{{ $s-&gt;nama }}&lt;/td&gt;
+        &lt;td&gt;{{ $s-&gt;jk }}&lt;/td&gt;
+        &lt;td&gt;{{ $s-&gt;golongan_darah }}&lt;/td&gt;
+    &lt;/tr&gt;
+    @endforeach
+&lt;/table&gt;</code></pre>
+            </div>
+
+            <figure class="article-figure">
+              <img
+                src="assets/create-facade-studi-3-result.png"
+                alt="Screenshot tampilan old value untuk jk dan golongan_darah di web browser"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan percobaan penggunaan <strong>old value</strong> pada field <strong>jk</strong> dan <strong>golongan_darah</strong> di web browser.
+              </figcaption>
+            </figure>
+
+            <p>
+              Dari studi kasus ini, saya memahami bahwa old value sangat membantu agar input pengguna
+              tetap tersimpan sementara saat form diproses, sehingga pengguna tidak perlu mengetik ulang dari awal.
+            </p>
+          </section>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Blog Pribadi Hazfi Febrianto</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

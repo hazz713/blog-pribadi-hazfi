@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Database Migration | Blog Pribadi Hazfi Febrianto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="subhero">
+    <nav class="topbar">
+      <span class="brand">Blog Pribadi</span>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="framework.html" class="nav-link">Framework</a>
+        <a href="migration.html" class="nav-link current">Migration</a>
+        <a href="controller.html" class="nav-link">Controller</a>
+        <a href="create-data.html" class="nav-link">Create Data</a>
+        <a href="edit-delete.html" class="nav-link">Edit Delete</a>
+        <a href="eloquent.html" class="nav-link">Eloquent</a>
+      </div>
+    </nav>
+
+    <div class="page-head">
+      <p class="eyebrow">Postingan Blog</p>
+      <h1>Database Migration</h1>
+      <p class="lead">
+        Halaman ini berisi materi database migration pada Laravel, mulai dari pembuatan tabel baru
+        sampai perubahan struktur tabel menggunakan migration.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section article-section">
+      <article class="post-card">
+        <div class="post-meta">
+          <span>Database Migration</span>
+          <span>Studi Kasus Baru</span>
+        </div>
+        <h3>Database Migration pada Laravel</h3>
+        <p>
+          Pada bagian ini, saya mempelajari bagaimana Laravel menggunakan migration untuk membuat dan
+          mengubah struktur tabel database secara rapi. Dengan migration, proses pembuatan tabel menjadi
+          lebih terstruktur karena semua perubahan bisa ditulis dalam bentuk kode.
+        </p>
+        <p>
+          Pada materi ini saya mengerjakan studi kasus pembuatan tabel baru, lalu melanjutkan dengan beberapa
+          perubahan struktur tabel menggunakan migration data. Agar pembahasan lebih jelas, saya menuliskan
+          source code contoh langsung di halaman ini tanpa menggunakan screenshot.
+        </p>
+
+        <div class="article-blocks">
+          <section class="article-block">
+            <p class="article-kicker">Studi Kasus 1</p>
+            <h4>Buatlah migrasi baru untuk membuat tabel t_percobaan. Cobalah buat minimal 15 field yang berbeda pada tabel tersebut.</h4>
+            <p>
+              Pada studi kasus pertama, saya diminta membuat tabel baru dengan minimal 15 field.
+              Pada kode yang saya kerjakan, tabel tersebut saya tulis dengan nama <strong>t_siswa</strong>.
+              Dari latihan ini saya belajar bahwa migration dapat dipakai untuk membuat struktur tabel
+              secara lengkap mulai dari field identitas sampai data tambahan lainnya.
+            </p>
+
+            <div class="code-example">
+              <p class="code-title">Contoh migration tabel t_siswa</p>
+              <pre><code>use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('t_siswa', function (Blueprint $table) {
+            $table->id();
+            $table->integer('nis');
+            $table->string('nama_lengkap', 100);
+            $table->date('tanggal_lahir');
+            $table->string('jenis_kelamin', 10);
+            $table->string('alamat', 100);
+            $table->string('kelas', 10);
+            $table->string('no_telpon', 15);
+            $table->string('jurusan', 50);
+            $table->string('email', 50);
+            $table->string('agama', 50);
+            $table->string('hobi', 100);
+            $table->string('sekolah', 100);
+            $table->string('tempat_lahir', 100);
+            $table->string('nama_ibu', 100);
+            $table->string('nama_ayah', 100);
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('t_siswa');
+    }
+};</code></pre>
+            </div>
+
+            <figure class="article-figure">
+              <img
+                src="assets/migration-studi-kasus-1-phpmyadmin.png"
+                alt="Screenshot tampilan tabel t_siswa di phpMyAdmin setelah migration studi kasus 1"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan tabel hasil migration studi kasus 1 di phpMyAdmin setelah seluruh field berhasil dibuat.
+              </figcaption>
+            </figure>
+
+            <p>
+              Dari contoh di atas, saya memahami bahwa migration bukan hanya membuat satu atau dua field,
+              tetapi bisa langsung membentuk keseluruhan tabel dalam satu file yang rapi.
+            </p>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Studi Kasus 2</p>
+            <h4>Membuat Migrasi Data pada Tabel t_kelas</h4>
+            <p>
+              Pada studi kasus kedua, saya melanjutkan pembelajaran dengan membuat tabel
+              <strong>t_kelas</strong>, lalu melakukan beberapa perubahan struktur tabel secara bertahap.
+              Dari tugas ini saya belajar bahwa migration juga bisa dipakai untuk menambah, mengubah,
+              dan mengganti nama field pada tabel yang sudah ada.
+            </p>
+
+            <ul class="article-list">
+              <li>Membuat tabel <strong>t_kelas</strong> dengan field nama_sekolah dan jurusan.</li>
+              <li>Menambahkan field <strong>lokasi_ruangan</strong>.</li>
+              <li>Mengubah panjang field <strong>jurusan</strong>.</li>
+              <li>Menambahkan field <strong>nama_wakel</strong>.</li>
+              <li>Mengubah nama field <strong>nama_wakel</strong> menjadi <strong>nama_wali_kelas</strong>.</li>
+            </ul>
+
+            <figure class="article-figure">
+              <img
+                src="assets/migration-studi-kasus-2-header.png"
+                alt="Screenshot perintah studi kasus 2 database migration beserta hasil awal tabel t_kelas"
+                class="article-image"
+              >
+              <figcaption>
+                Perintah studi kasus 2 beserta hasil awal tabel <strong>t_kelas</strong> di phpMyAdmin.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Langkah 1</p>
+            <h4>Buatlah tabel t_kelas dengan field nama_kelas, jurusan</h4>
+            <div class="code-example">
+              <p class="code-title">Migration awal tabel t_kelas</p>
+              <pre><code>use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('t_kelas', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string('nama_sekolah', 100);
+            $table->string('jurusan', 100);
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('t_kelas');
+    }
+};</code></pre>
+            </div>
+            <p>
+              Pada langkah awal ini, saya mulai dari membuat tabel dasar terlebih dahulu sebelum melakukan
+              perubahan pada field-field berikutnya.
+            </p>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Langkah 2</p>
+            <h4>Buatlah perubahan tabel t_kelas dengan menambahkan field lokasi_ruangan</h4>
+            <div class="code-example">
+              <p class="code-title">Migration menambah lokasi_ruangan</p>
+              <pre><code>use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('t_kelas', function (Blueprint $table) {
+            $table->string('lokasi_ruangan', 50)->after('jurusan');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('t_kelas', function (Blueprint $table) {
+            $table->dropColumn('lokasi_ruangan');
+        });
+    }
+};</code></pre>
+            </div>
+            <p>
+              Dari langkah ini saya belajar cara menambahkan kolom baru ke tabel yang sudah dibuat sebelumnya.
+            </p>
+
+            <figure class="article-figure">
+              <img
+                src="assets/migration-studi-kasus-2-no2.png"
+                alt="Screenshot hasil phpMyAdmin langkah 2 setelah field lokasi_ruangan ditambahkan"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan phpMyAdmin setelah field <strong>lokasi_ruangan</strong> ditambahkan ke tabel <strong>t_kelas</strong>.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Langkah 3</p>
+            <h4>Buatlah perubahan tabel t_kelas, jurusan dengan mengganti panjangnya</h4>
+            <div class="code-example">
+              <p class="code-title">Migration mengubah panjang jurusan</p>
+              <pre><code>use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('t_kelas', function (Blueprint $table) {
+            $table->string('jurusan', 55)->change();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('t_kelas', function (Blueprint $table) {
+            $table->string('jurusan')->change();
+        });
+    }
+};</code></pre>
+            </div>
+            <p>
+              Pada bagian ini saya memahami bahwa field yang sudah ada pun tetap bisa diubah kembali sesuai kebutuhan.
+            </p>
+
+            <figure class="article-figure">
+              <img
+                src="assets/migration-studi-kasus-2-no3.png"
+                alt="Screenshot hasil phpMyAdmin langkah 3 setelah panjang field jurusan diubah"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan phpMyAdmin setelah perubahan panjang field <strong>jurusan</strong>.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Langkah 4</p>
+            <h4>Buatlah perubahan tabel t_kelas dengan menambahkan field nama_wakel</h4>
+            <div class="code-example">
+              <p class="code-title">Migration menambah nama_wakel</p>
+              <pre><code>use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('t_kelas', function (Blueprint $table) {
+            $table->string('nama_wakel', 50)->after('lokasi_ruangan');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('t_kelas', function (Blueprint $table) {
+            $table->dropColumn('nama_wakel');
+        });
+    }
+};</code></pre>
+            </div>
+            <p>
+              Migration ini memperlihatkan bahwa penambahan field baru bisa dilakukan berulang sesuai perkembangan data.
+            </p>
+
+            <figure class="article-figure">
+              <img
+                src="assets/migration-studi-kasus-2-no4.png"
+                alt="Screenshot hasil phpMyAdmin langkah 4 setelah field nama_wakel ditambahkan"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan phpMyAdmin setelah field <strong>nama_wakel</strong> ditambahkan.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Langkah 5</p>
+            <h4>Buatlah perubahan tabel t_kelas dengan mengubah nama field nama_wakel menjadi nama_wali_kelas</h4>
+            <div class="code-example">
+              <p class="code-title">Migration rename field</p>
+              <pre><code>use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('t_kelas', function (Blueprint $table) {
+            $table->renameColumn('nama_wakel', 'nama_wali_kelas');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('t_kelas', function (Blueprint $table) {
+            $table->renameColumn('nama_wali_kelas', 'nama_wakel');
+        });
+    }
+};</code></pre>
+            </div>
+            <p>
+              Dari bagian ini saya belajar bahwa Laravel juga menyediakan cara untuk mengganti nama field tanpa
+              harus membuat tabel baru dari awal.
+            </p>
+
+            <figure class="article-figure">
+              <img
+                src="assets/migration-studi-kasus-2-no5.png"
+                alt="Screenshot hasil phpMyAdmin langkah 5 setelah nama field menjadi nama_wali_kelas"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan phpMyAdmin setelah nama field diubah menjadi <strong>nama_wali_kelas</strong>.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Kesimpulan</p>
+            <h4>Pemahaman yang Saya Dapatkan</h4>
+            <p>
+              Setelah mengerjakan materi database migration ini, saya menjadi lebih paham bahwa migration
+              sangat berguna untuk membuat dan mengelola struktur database secara bertahap. Saya juga belajar
+              bahwa perubahan tabel bisa dilakukan dengan lebih rapi karena semua langkah tersimpan dalam kode.
+            </p>
+            <p>
+              Menurut saya, penggunaan migration sangat membantu dalam pengembangan project Laravel karena
+              struktur database menjadi lebih mudah dipelajari, diperbaiki, dan dikembangkan kembali.
+            </p>
+            <a href="framework.html" class="inline-link">Lihat kembali halaman framework</a>
+          </section>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Blog Pribadi Hazfi Febrianto</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

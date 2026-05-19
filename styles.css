@@ -68,6 +68,12 @@ a {
   gap: 16px;
 }
 
+.nav-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
 .brand {
   padding: 10px 16px;
   border: 1px solid var(--line);
@@ -82,12 +88,31 @@ a {
   font-weight: 700;
 }
 
+.nav-link.current {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
 .hero-content {
   padding: 72px 0 32px;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
   align-items: center;
   gap: 34px;
+}
+
+.subhero {
+  padding: 28px 24px 8px;
+}
+
+.page-head,
+.subhero .topbar {
+  width: min(1100px, calc(100% - 8px));
+  margin: 0 auto;
+}
+
+.page-head {
+  padding: 56px 0 10px;
 }
 
 .hero-copy {
@@ -218,6 +243,18 @@ a {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.page-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .card,
 .post-card,
 .closing-box {
@@ -280,6 +317,12 @@ a {
   border-radius: 20px;
   border: 1px solid var(--line);
   box-shadow: 0 14px 34px rgba(82, 50, 31, 0.12);
+}
+
+.article-image-crop {
+  height: 250px;
+  object-fit: cover;
+  object-position: top;
 }
 
 .article-figure figcaption {
@@ -379,7 +422,8 @@ a {
 @media (max-width: 900px) {
   .hero-content,
   .profile-grid,
-  .highlight-grid {
+  .highlight-grid,
+  .page-grid {
     grid-template-columns: 1fr;
   }
 
@@ -407,6 +451,10 @@ a {
     width: min(1100px, calc(100% - 28px));
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .page-head {
+    width: min(1100px, calc(100% - 28px));
   }
 
   .biodata-list li,

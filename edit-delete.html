@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit & Delete Data | Blog Pribadi Hazfi Febrianto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="subhero">
+    <nav class="topbar">
+      <span class="brand">Blog Pribadi</span>
+     <div class="nav-menu">
+  <a href="index.html" class="nav-link">Beranda</a>
+  <a href="framework.html" class="nav-link">Framework</a>
+  <a href="migration.html" class="nav-link">Migration</a>
+  <a href="controller.html" class="nav-link">Controller</a>
+  <a href="create-data.html" class="nav-link">Create Data</a>
+  <a href="edit-delete.html" class="nav-link current">Edit Delete</a>
+  <a href="eloquent.html" class="nav-link">Eloquent</a>
+</div>
+    </nav>
+
+    <div class="page-head">
+      <p class="eyebrow">Postingan Blog</p>
+      <h1>Edit &amp; Delete Data</h1>
+      <p class="lead">
+        Halaman ini berisi materi edit dan delete data pada Laravel, mulai dari penjelasan fungsi
+        sampai implementasi tombol edit dan delete pada data siswa.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section article-section">
+      <article class="post-card">
+        <div class="post-meta">
+          <span>Edit &amp; Delete</span>
+          <span>Laravel CRUD</span>
+        </div>
+        <h3>Edit dan Delete Data dengan Laravel</h3>
+        <p>
+          Pada materi ini, saya mempelajari bagaimana data yang sudah tersimpan dapat diubah kembali
+          menggunakan fitur edit, dan bagaimana data tersebut dapat dihapus dengan fitur delete.
+        </p>
+
+        <div class="article-blocks">
+          <section class="article-block">
+            <p class="article-kicker">Studi Kasus 1</p>
+            <h4>Jelaskan isi dari fungsi update() dan destroy() pada SiswaController menurut pemahaman masing-masing</h4>
+            <p>
+              Menurut pemahaman saya, fungsi <strong>update()</strong> digunakan untuk mengubah data siswa
+              yang sudah tersimpan di database. Jadi ketika kita klik tombol edit lalu mengganti data
+              seperti nama, jenis kelamin, atau golongan darah, fungsi ini akan menerima data baru dari form,
+              kemudian mencari data berdasarkan id, lalu memperbarui isi datanya di tabel <strong>t_siswa</strong>.
+              Setelah itu, halaman akan kembali ke daftar siswa dengan pesan bahwa data berhasil diupdate.
+            </p>
+            <p>
+              Sedangkan fungsi <strong>destroy()</strong> digunakan untuk menghapus data siswa.
+              Saat tombol delete ditekan, sistem akan mengambil id siswa tersebut lalu menghapus datanya
+              dari database. Setelah dihapus, halaman kembali lagi ke daftar siswa dan menampilkan pesan
+              bahwa data berhasil dihapus.
+            </p>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Studi Kasus 2</p>
+            <h4>Implementasikan Edit dan Delete pada data siswa</h4>
+            <p>
+              Pada studi kasus kedua, saya mengimplementasikan fitur edit dan delete pada data siswa.
+              Walaupun pada beberapa catatan tertulis <strong>t_kelas</strong>, kode yang saya kerjakan
+              pada materi ini menggunakan tabel <strong>t_siswa</strong> di dalam <strong>SiswaController</strong>
+              dan view <strong>siswa.form</strong>.
+            </p>
+
+            <div class="code-example">
+              <p class="code-title">Source code Edit() dan Update() di Controller</p>
+              <pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class SiswaController extends Controller
+{
+    // TAMPIL + LIST DATA
+    function index()
+    {
+        $siswa = DB::table('t_siswa')->get();
+        return view('siswa.form', compact('siswa'));
+    }
+
+    // SIMPAN
+    function store(Request $request)
+    {
+        DB::table('t_siswa')->insert([
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'golongan_darah' => $request->golongan_darah
+        ]);
+
+        return redirect('/siswa')->with('success', 'Data berhasil ditambahkan');
+    }
+
+    // EDIT
+    function edit($id)
+    {
+        $edit = DB::table('t_siswa')->find($id);
+        $siswa = DB::table('t_siswa')->get();
+
+        return view('siswa.form', compact('edit', 'siswa'));
+    }
+
+    // UPDATE
+    function update(Request $request, $id)
+    {
+        DB::table('t_siswa')->where('id', $id)->update([
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'golongan_darah' => $request->golongan_darah
+        ]);
+
+        return redirect('/siswa')->with('success', 'Data berhasil diupdate');
+    }
+}</code></pre>
+            </div>
+
+            <div class="code-example">
+              <p class="code-title">Source code Form Edit di Views</p>
+              <pre><code>&lt;h2&gt;Form Siswa&lt;/h2&gt;
+
+@if(session('success'))
+&lt;p style="color:green"&gt;{{ session('success') }}&lt;/p&gt;
+@endif
+
+&lt;form method="POST" action="{{ isset($edit) ? '/siswa/'.$edit-&gt;id : '/siswa/store' }}"&gt;
+@csrf
+
+@if(isset($edit))
+    @method('PATCH')
+@endif
+
+Nama:
+&lt;input type="text" name="nama" value="{{ old('nama', $edit-&gt;nama ?? '') }}"&gt;
+&lt;br&gt;&lt;br&gt;
+
+JK:
+&lt;input type="radio" name="jk" value="L" {{ old('jk', $edit-&gt;jk ?? '') == 'L' ? 'checked' : '' }}&gt; L
+&lt;input type="radio" name="jk" value="P" {{ old('jk', $edit-&gt;jk ?? '') == 'P' ? 'checked' : '' }}&gt; P
+
+&lt;br&gt;&lt;br&gt;
+
+Golongan Darah:
+&lt;select name="golongan_darah"&gt;
+&lt;option value="A" {{ old('golongan_darah', $edit-&gt;golongan_darah ?? '') == 'A' ? 'selected' : '' }}&gt;A&lt;/option&gt;
+&lt;option value="B" {{ old('golongan_darah', $edit-&gt;golongan_darah ?? '') == 'B' ? 'selected' : '' }}&gt;B&lt;/option&gt;
+&lt;option value="AB" {{ old('golongan_darah', $edit-&gt;golongan_darah ?? '') == 'AB' ? 'selected' : '' }}&gt;AB&lt;/option&gt;
+&lt;option value="O" {{ old('golongan_darah', $edit-&gt;golongan_darah ?? '') == 'O' ? 'selected' : '' }}&gt;O&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;br&gt;&lt;br&gt;
+&lt;button type="submit"&gt;Simpan&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;hr&gt;
+
+&lt;table border="1" cellpadding="6"&gt;
+&lt;tr&gt;
+    &lt;th&gt;ID&lt;/th&gt;
+    &lt;th&gt;Nama&lt;/th&gt;
+    &lt;th&gt;JK&lt;/th&gt;
+    &lt;th&gt;Goldar&lt;/th&gt;
+    &lt;th&gt;Aksi&lt;/th&gt;
+&lt;/tr&gt;
+
+@foreach($siswa as $s)
+&lt;tr&gt;
+    &lt;td&gt;{{ $s-&gt;id }}&lt;/td&gt;
+    &lt;td&gt;{{ $s-&gt;nama }}&lt;/td&gt;
+    &lt;td&gt;{{ $s-&gt;jk }}&lt;/td&gt;
+    &lt;td&gt;{{ $s-&gt;golongan_darah }}&lt;/td&gt;
+    &lt;td&gt;
+        &lt;a href="/siswa/edit/{{ $s-&gt;id }}"&gt;Edit&lt;/a&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+@endforeach
+&lt;/table&gt;</code></pre>
+            </div>
+
+            <figure class="article-figure">
+              <img
+                src="assets/edit-delete-studi-2-edit-result-fixed.png"
+                alt="Screenshot tampilan percobaan edit data siswa"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan percobaan <strong>Edit</strong> data siswa setelah proses update berhasil dilakukan.
+              </figcaption>
+            </figure>
+
+            <div class="code-example">
+              <p class="code-title">Source code Destroy() di Controller dan Button Delete di Views</p>
+              <pre><code>// DESTROY DI CONTROLLER
+function destroy($id)
+{
+    DB::table('t_siswa')->where('id', $id)->delete();
+
+    return redirect('/siswa')->with('success', 'Data berhasil dihapus');
+}
+
+// AKSI EDIT DAN DELETE DI VIEW
+&lt;td&gt;
+    &lt;a href="/siswa/edit/{{ $s-&gt;id }}"&gt;Edit&lt;/a&gt;
+
+    &lt;form action="/siswa/{{ $s-&gt;id }}" method="POST" style="display:inline"&gt;
+        @csrf
+        @method('DELETE')
+        &lt;button type="submit"&gt;Delete&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/td&gt;</code></pre>
+            </div>
+
+            <figure class="article-figure">
+              <img
+                src="assets/edit-delete-studi-2-delete-result.png"
+                alt="Screenshot tampilan percobaan delete data siswa"
+                class="article-image"
+              >
+              <figcaption>
+                Tampilan percobaan <strong>Delete</strong> data siswa setelah salah satu data berhasil dihapus.
+              </figcaption>
+            </figure>
+
+            <p>
+              Dari studi kasus ini, saya memahami bahwa fitur edit dan delete merupakan bagian penting
+              dalam CRUD karena data yang sudah tersimpan dapat diperbarui maupun dihapus sesuai kebutuhan.
+            </p>
+          </section>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Blog Pribadi Hazfi Febrianto</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controller & Facade DB | Blog Pribadi Hazfi Febrianto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="subhero">
+    <nav class="topbar">
+      <span class="brand">Blog Pribadi</span>
+     <div class="nav-menu">
+     <a href="index.html" class="nav-link">Beranda</a>
+     <a href="framework.html" class="nav-link">Framework</a>
+     <a href="migration.html" class="nav-link">Migration</a>
+     <a href="controller.html" class="nav-link current">Controller</a>
+     <a href="create-data.html" class="nav-link">Create Data</a>
+     <a href="edit-delete.html" class="nav-link">Edit Delete</a>
+     <a href="eloquent.html" class="nav-link">Eloquent</a>
+     </div>
+    </nav>
+
+    <div class="page-head">
+      <p class="eyebrow">Postingan Blog</p>
+      <h1>Controller &amp; Facade DB</h1>
+      <p class="lead">
+        Halaman ini berisi materi Controller dan Facade DB pada Laravel, dimulai dari studi kasus
+        pemindahan route ke dalam controller.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section article-section">
+      <article class="post-card">
+        <div class="post-meta">
+          <span>Controller</span>
+          <span>Studi Kasus 1</span>
+        </div>
+        <h3>Controller pada Laravel</h3>
+        <p>
+          Pada materi ini, saya mulai mempelajari bagaimana route yang sebelumnya ditulis langsung
+          dapat dipindahkan ke dalam controller. Dengan cara ini, kode menjadi lebih rapi karena logika
+          dipisahkan dari file route.
+        </p>
+
+        <div class="article-blocks">
+          <section class="article-block">
+            <p class="article-kicker">Studi Kasus 1</p>
+            <h4>Pindahkan 3 route yang sebelumnya anda buat di routes ke SiswaController</h4>
+            <p>
+              Pada studi kasus pertama, saya diminta memindahkan tiga route yang sebelumnya dibuat
+              di file route ke dalam <strong>SiswaController</strong>. Dari latihan ini saya belajar
+              bahwa controller membantu mengatur fungsi-fungsi agar lebih terstruktur dan mudah dibaca.
+            </p>
+
+            <div class="code-example">
+              <p class="code-title">Source code SiswaController</p>
+              <pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class SiswaController extends Controller
+{
+    function index() {
+        $nama = "Fajar";
+        $jk   = "Laki-laki";
+        return view('belajar', compact('nama', 'jk'));
+    }
+
+    function index1() {
+        $nama = "Arif";
+        $jk   = "Laki-laki";
+        return view('belajar', compact('nama', 'jk'));
+    }
+
+    function index2() {
+        $nama = "Maman";
+        $jk   = "Laki-laki";
+        return view('belajar', compact('nama', 'jk'));
+    }
+}</code></pre>
+            </div>
+
+            <figure class="article-figure">
+              <img
+                src="assets/controller-studi-kasus-1-result-2.png"
+                alt="Screenshot hasil route belajar dan belajar1 setelah dipindahkan ke SiswaController"
+                class="article-image"
+              >
+              <figcaption>
+                Hasil tampilan halaman <strong>belajar</strong> dan <strong>belajar1</strong> setelah route dipindahkan ke <strong>SiswaController</strong>.
+              </figcaption>
+            </figure>
+
+            <figure class="article-figure">
+              <img
+                src="assets/controller-studi-kasus-1-result.png"
+                alt="Screenshot hasil route belajar2 setelah dipindahkan ke SiswaController"
+                class="article-image"
+              >
+              <figcaption>
+                Hasil tampilan halaman <strong>belajar2</strong> setelah route dipindahkan ke <strong>SiswaController</strong>.
+              </figcaption>
+            </figure>
+
+            <p>
+              Dari studi kasus ini, saya memahami bahwa controller membuat penulisan project Laravel
+              menjadi lebih rapi karena setiap fungsi dapat ditempatkan dalam class tersendiri.
+            </p>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Studi Kasus 2</p>
+            <h4>Isi data dummy untuk tabel t_kelas dan tampilkan data dari t_kelas menggunakan controller dan view</h4>
+            <p>
+              Pada studi kasus kedua, saya diminta mengisi data dummy pada tabel <strong>t_kelas</strong>,
+              lalu membuat controller dan memodifikasi view agar data dari tabel tersebut bisa ditampilkan
+              di browser. Dari latihan ini saya mulai memahami penggunaan <strong>Facade DB</strong>
+              untuk mengambil data langsung dari database.
+            </p>
+
+            <figure class="article-figure">
+              <img
+                src="assets/controller-studi-kasus-2-overview.png"
+                alt="Screenshot perintah studi kasus 2 dan tampilan data dummy tabel t_kelas di phpMyAdmin"
+                class="article-image"
+              >
+              <figcaption>
+                Urutan awal studi kasus 2 dimulai dari perintah tugas dan data dummy pada tabel <strong>t_kelas</strong> di phpMyAdmin.
+              </figcaption>
+            </figure>
+
+            <div class="code-example">
+              <p class="code-title">Source code KelasController</p>
+              <pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class KelasController extends Controller
+{
+    // Fungsi untuk menampilkan semua data kelas
+    public function index()
+    {
+        // Ambil semua data dari tabel t_kelas
+        $data_kelas = DB::table('t_kelas')->get();
+
+        // Kirim data ke view
+        return view('kelas.index', ['data_kelas' => $data_kelas]);
+    }
+}</code></pre>
+            </div>
+
+            <div class="code-example">
+              <p class="code-title">Source code View Kelas</p>
+              <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Data Kelas XI SMKN 4 Bandung&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 80%;
+            background: white;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Data Kelas XI SMKN 4 Bandung&lt;/h1&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;ID&lt;/th&gt;
+                &lt;th&gt;Nama Kelas&lt;/th&gt;
+                &lt;th&gt;Jurusan&lt;/th&gt;
+                &lt;th&gt;Lokasi Ruangan&lt;/th&gt;
+                &lt;th&gt;Nama Wali Kelas&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            @foreach ($data_kelas as $kelas)
+            &lt;tr&gt;
+                &lt;td&gt;{{ $kelas-&gt;id }}&lt;/td&gt;
+                &lt;td&gt;{{ $kelas-&gt;nama_kelas }}&lt;/td&gt;
+                &lt;td&gt;{{ $kelas-&gt;jurusan }}&lt;/td&gt;
+                &lt;td&gt;{{ $kelas-&gt;lokasi_ruangan }}&lt;/td&gt;
+                &lt;td&gt;{{ $kelas-&gt;nama_wali_kelas }}&lt;/td&gt;
+            &lt;/tr&gt;
+            @endforeach
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+
+            <figure class="article-figure">
+              <img
+                src="assets/controller-studi-kasus-2-web-result.png"
+                alt="Screenshot tampilan data kelas di web browser hasil dari KelasController dan view"
+                class="article-image"
+              >
+              <figcaption>
+                Hasil tampilan data kelas di web browser setelah data dari tabel <strong>t_kelas</strong> dipanggil melalui <strong>KelasController</strong>.
+              </figcaption>
+            </figure>
+
+            <p>
+              Dari studi kasus ini, saya memahami bahwa Facade DB dapat digunakan untuk mengambil data dari
+              tabel database, lalu controller mengirimkannya ke view agar dapat ditampilkan dengan bentuk
+              yang lebih rapi di halaman web.
+            </p>
+          </section>
+
+          <section class="article-block">
+            <p class="article-kicker">Studi Kasus 3</p>
+            <h4>Lakukan beberapa query di bawah ini untuk menampilkan data pada t_kelas</h4>
+            <p>
+              Pada studi kasus ketiga, saya diminta menjalankan beberapa query untuk menampilkan data
+              dari tabel <strong>t_kelas</strong> dengan kondisi yang berbeda-beda. Pada bagian ini saya
+              mengikuti urutan hasil seperti yang ada pada screenshot tugas.
+            </p>
+
+            <figure class="article-figure">
+              <img
+                src="assets/controller-studi-kasus-3-no1.png"
+                alt="Screenshot studi kasus 3 nomor 1 menampilkan data t_kelas diurutkan berdasarkan lokasi ruangan"
+                class="article-image"
+              >
+              <figcaption>
+                No. 1: Menampilkan data dari <strong>t_kelas</strong> yang diurutkan berdasarkan <strong>lokasi ruangan</strong>.
+              </figcaption>
+            </figure>
+
+            <figure class="article-figure">
+              <img
+                src="assets/controller-studi-kasus-3-no2.png"
+                alt="Screenshot studi kasus 3 nomor 2 menampilkan data dengan nama wali kelas diawali huruf A"
+                class="article-image"
+              >
+              <figcaption>
+                No. 2: Menampilkan data dari <strong>t_kelas</strong> yang memiliki nama wali kelas diawali huruf <strong>A</strong>.
+              </figcaption>
+            </figure>
+
+            <figure class="article-figure">
+              <img
+                src="assets/controller-studi-kasus-3-no3.png"
+                alt="Screenshot studi kasus 3 nomor 3 menampilkan data diurutkan berdasarkan jurusan dan nama_kelas"
+                class="article-image"
+              >
+              <figcaption>
+                No. 3: Menampilkan data dari <strong>t_kelas</strong> yang diurutkan berdasarkan <strong>jurusan</strong> dan <strong>nama_kelas</strong>.
+              </figcaption>
+            </figure>
+
+            <figure class="article-figure">
+              <img
+                src="assets/controller-studi-kasus-3-no4.png"
+                alt="Screenshot studi kasus 3 nomor 4 menampilkan data jurusan Rekayasa Perangkat Lunak"
+                class="article-image"
+              >
+              <figcaption>
+                No. 4: Menampilkan data dari <strong>t_kelas</strong> khusus jurusan <strong>Rekayasa Perangkat Lunak</strong>.
+              </figcaption>
+            </figure>
+
+            <p>
+              Dari studi kasus ini, saya memahami bahwa query pada Laravel dapat dipakai untuk mengurutkan,
+              memfilter, dan menampilkan data sesuai kebutuhan yang berbeda-beda.
+            </p>
+          </section>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Blog Pribadi Hazfi Febrianto</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

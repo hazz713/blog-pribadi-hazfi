@@ -1,6 +1,5 @@
 # Blog Pribadi Hazfi
 
-Folder ini dibuat khusus untuk website blog pribadi dan dipisahkan dari file project lain.
 
 ## Isi
 
@@ -21,6 +20,11 @@ Versi ini adalah tampilan awal blog pribadi yang netral. Konten artikel project 
 Folder `blog-pribadi-hazfi` ini sudah menggunakan file yang cocok untuk website statis:
 
 - `index.html` sebagai halaman utama
+- `framework.html` untuk materi framework Laravel
+- `migration.html` untuk materi database migration
+- `controller.html` untuk materi controller dan Facade DB
+- `create-data.html` untuk materi create data with Facade DB
+- `edit-delete.html` untuk materi edit dan delete data
 - `styles.css` sebagai tampilan
 - `script.js` sebagai animasi
 - `assets/` untuk foto dan screenshot

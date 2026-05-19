@@ -10,7 +10,15 @@
   <header class="hero">
     <nav class="topbar">
       <span class="brand">Blog Pribadi</span>
-      <a href="#artikel" class="nav-link">Lihat Artikel</a>
+      <div class="nav-menu">
+  <a href="index.html" class="nav-link current">Beranda</a>
+  <a href="framework.html" class="nav-link">Framework</a>
+  <a href="migration.html" class="nav-link">Migration</a>
+  <a href="controller.html" class="nav-link">Controller</a>
+  <a href="create-data.html" class="nav-link">Create Data</a>
+  <a href="edit-delete.html" class="nav-link">Edit Delete</a>
+  <a href="eloquent.html" class="nav-link">Eloquent</a>
+      </div>
     </nav>
 
     <div class="hero-content">
@@ -19,13 +27,13 @@
         <h1>Hazfi Febrianto</h1>
         <p class="lead">
           Perkenalkan, nama saya Hazfi Febrianto. Website ini saya buat sebagai blog pribadi
-          untuk menampilkan identitas diri, cerita singkat tentang saya, dan nantinya akan
-          saya gunakan untuk menulis proses pengerjaan project Laravel dari awal sampai akhir.
+          untuk menampilkan identitas diri, cerita singkat tentang saya, dan dokumentasi proses
+          belajar saya dalam mengerjakan tugas project Laravel.
         </p>
 
         <div class="hero-actions">
           <a href="#profil" class="button primary">Lihat Profil</a>
-          <a href="#artikel" class="button secondary">Buka Blog</a>
+          <a href="framework.html" class="button secondary">Buka Materi</a>
         </div>
       </div>
 
@@ -50,9 +58,9 @@
         <article class="card intro-card">
           <h3>Tentang Saya</h3>
           <p>
-            Saya adalah seorang pelajar yang sedang belajar membangun project website.
+            Saya adalah seorang pelajar yang sedang belajar untuk mencoba untuk menjadi lebih baik setiap harinya,saya di web ini sedang mencoba membangun project website.
             Saya senang mempelajari hal-hal baru di bidang teknologi, terutama pembuatan tampilan web
-            dan pengembangan aplikasi berbasis Laravel.
+            dan saya mempunyai hobi bermain game, maka dari itu hobi dan kesenangan saya di bidang tekhnologi saya jadikan untuk belajar.
           </p>
           <p>
             Melalui blog ini, saya ingin menuliskan proses belajar saya dengan bahasa yang sopan,
@@ -64,12 +72,13 @@
           <h3>Biodata</h3>
           <ul class="biodata-list">
             <li><span>Nama lengkap</span><strong>Hazfi Febrianto</strong></li>
-            <li><span>Status</span><strong>Pelajar</strong></li>
-            <li><span>Bidang minat</span><strong>Game & Web Development</strong></li>
-            <li><span>Asal Negara</span><strong>Indonesia</strong></li>
+            <li><span>Kelas </span><strong>XI RPL 2</strong></li>
+            <li><span>Sekolah</span><strong>SMKN 4 Bandung</strong></li>
+            <li><span>Bidang minat</span><strong>Game &amp; Web Development</strong></li>
+            <li><span>Asal negara</span><strong>Indonesia</strong></li>
           </ul>
           <p class="note">
-            Catatan: bagian biodata ini bisa kita lengkapi lagi nanti sesuai data asli yang ingin kamu tampilkan.
+            
           </p>
         </article>
       </div>
@@ -77,208 +86,84 @@
 
     <section class="section highlight-section">
       <div class="section-heading">
-        <p class="section-label">Tujuan Blog</p>
-        <h2>Apa Isi Website Ini?</h2>
+        <p class="section-label">Isi Website</p>
+        <h2>Halaman yang Tersedia</h2>
       </div>
 
-      <div class="highlight-grid">
-        <article class="card">
-          <h3>Perkenalan Diri</h3>
+      <div class="page-grid">
+        <article class="card page-card">
+          <p class="article-kicker">Halaman 1</p>
+          <h3>Beranda</h3>
           <p>
-            Website ini menampilkan identitas diri saya secara singkat dan tertata agar pembaca
-            mengenal saya sebelum membaca isi postingan.
+            Halaman ini berisi perkenalan diri, tujuan pembuatan blog, dan gambaran umum isi website.
           </p>
+          <a href="index.html" class="inline-link">Kamu sedang di sini</a>
         </article>
-        <article class="card">
-          <h3>Dokumentasi Tugas</h3>
+
+        <article class="card page-card">
+          <p class="article-kicker">Halaman 2</p>
+          <h3>Framework Laravel</h3>
           <p>
-            Blog ini akan saya gunakan untuk mendokumentasikan tugas project, terutama penjelasan
-            project Laravel berdasarkan hasil kerja yang sudah saya buat sebelumnya.
+            Berisi materi framework Laravel dan studi kasus yang sudah saya kerjakan pada tahap awal.
           </p>
+          <a href="framework.html" class="inline-link">Buka halaman framework</a>
         </article>
-        <article class="card">
-          <h3>Catatan Belajar</h3>
+
+        <article class="card page-card">
+          <p class="article-kicker">Halaman 3</p>
+          <h3>Database Migration</h3>
           <p>
-            Setiap postingan nantinya akan berisi alur pengerjaan, kendala yang ditemui, serta
-            solusi yang saya pelajari selama proses pengembangan.
+            Halaman ini berisi materi database migration, mulai dari pembuatan tabel baru sampai perubahan struktur tabel.
           </p>
+          <a href="migration.html" class="inline-link">Buka halaman migration</a>
         </article>
+
+        <article class="card page-card">
+          <p class="article-kicker">Halaman 4</p>
+          <h3>Controller &amp; Facade DB</h3>
+          <p>
+            Halaman ini berisi materi controller Laravel dan nantinya bisa dilanjutkan ke pembahasan Facade DB.
+          </p>
+          <a href="controller.html" class="inline-link">Buka halaman controller</a>
+        </article>
+
+        <article class="card page-card">
+          <p class="article-kicker">Halaman 5</p>
+          <h3>Create Data with Facade DB</h3>
+          <p>
+            Halaman ini berisi materi create data, form input, validasi, feedback message, dan old value menggunakan Facade DB.
+          </p>
+          <a href="create-data.html" class="inline-link">Buka halaman create data</a>
+        </article>
+
+      <article class="card page-card">
+  <p class="article-kicker">Halaman 6</p>
+  <h3>Edit &amp; Delete Data</h3>
+  <p>
+    Halaman ini berisi materi update, destroy, edit form, dan delete data pada Laravel.
+  </p>
+  <a href="edit-delete.html" class="inline-link">
+    Buka halaman edit delete
+  </a>
+</article>
+
+<article class="card page-card">
+  <p class="article-kicker">Halaman 7</p>
+  <h3>Eloquent Laravel</h3>
+
+  <p>
+    Halaman ini berisi materi penggunaan Eloquent sebagai ORM Laravel
+    untuk melakukan create, read, update, dan delete data dengan lebih mudah.
+  </p>
+
+  <a href="eloquent.html" class="nav-link">Buka halaman Eloquent</a>
+    
+  </a>
+</article>
       </div>
     </section>
 
-    <section id="artikel" class="section article-section">
-      <div class="section-heading">
-        <p class="section-label">Postingan Blog</p>
-        <h2>Framework Laravel dan Tugas Pertamaku</h2>
-      </div>
-
-      <article class="post-card">
-        <div class="post-meta">
-          <span>Framework Laravel</span>
-          <span>Studi Kasus 1</span>
-        </div>
-        <h3>Pengenalan Framework Laravel</h3>
-        <p>
-          Assalamualaikum warahmatullahi wabarakatuh. Perkenalkan, nama saya Hazfi Febrianto.
-          Pada postingan ini saya ingin membagikan hasil belajar saya tentang framework Laravel,
-          sebagai awal dari perjalanan belajar saya dalam membuat project web.
-        </p>
-        <p>
-          Saya memulai dari pengenalan dasar Laravel terlebih dahulu, lalu mencoba praktik sederhana
-          agar saya bisa memahami alur kerja route, view, dan struktur project dengan lebih baik sebelum
-          masuk ke studi kasus yang saya kerjakan.
-        </p>
-
-        <div class="article-blocks">
-          <section class="article-block">
-            <p class="article-kicker">Bagian Awal</p>
-            <h4>Pengenalan Framework Laravel</h4>
-            <p>
-              Laravel adalah framework PHP yang memudahkan proses pembuatan website karena memiliki
-              struktur yang rapi, sintaks yang lebih mudah dipahami, dan banyak fitur bawaan yang membantu pengembangan.
-            </p>
-            <p>
-              Dalam tahap awal pembelajaran, saya mulai mengenal cara kerja route, file view, dan pola
-              penulisan kode yang terorganisir. Dari sini saya mulai memahami bahwa Laravel sangat cocok
-              digunakan untuk membangun aplikasi web secara bertahap dan terstruktur.
-            </p>
-          </section>
-
-          <section class="article-block">
-            <p class="article-kicker">Studi Kasus 1</p>
-            <h4>Membuat Route GET Sederhana</h4>
-            <p>
-              Pada latihan pertama, saya diminta membuat 3 route berbeda dengan tipe <strong>GET</strong>.
-              Tujuan latihan ini adalah agar saya memahami bentuk umum penulisan route pada Laravel.
-            </p>
-            <ul class="article-list">
-              <li>Route pertama menampilkan halaman utama atau tampilan awal.</li>
-              <li>Route kedua menampilkan perkenalan singkat tentang diri saya.</li>
-              <li>Route ketiga menampilkan informasi sederhana seperti hobi atau sekolah.</li>
-            </ul>
-            <p>
-              Dari latihan ini, saya belajar bahwa file <strong>web.php</strong> berperan penting untuk
-              mengatur jalur akses halaman. Saya juga mulai memahami bagaimana sebuah route bisa langsung
-              menampilkan teks atau memanggil tampilan tertentu.
-            </p>
-
-            <figure class="article-figure">
-              <img
-                src="assets/lkpd-studi-kasus-1.png"
-                alt="Screenshot LKPD studi kasus 1 Laravel tentang pembuatan 3 route GET berbeda"
-                class="article-image"
-              >
-              <figcaption>
-                Screenshot hasil LKPD saya pada studi kasus 1, yaitu membuat 3 route GET berbeda di Laravel.
-              </figcaption>
-            </figure>
-          </section>
-
-          <section class="article-block">
-            <p class="article-kicker">Studi Kasus 2</p>
-            <h4>Membuat 3 View dan Memanggilkannya di Route</h4>
-            <p>
-              Pada studi kasus kedua, saya melanjutkan tugas dengan membuat 3 file <strong>view</strong>
-              yang berbeda, lalu memanggil masing-masing view tersebut melalui route yang sudah dibuat sebelumnya.
-            </p>
-            <p>
-              Melalui latihan ini, saya mulai memahami hubungan antara route dan view pada Laravel.
-              Jadi, route tidak hanya menampilkan teks biasa, tetapi juga bisa diarahkan ke halaman tampilan
-              yang sudah dibuat di dalam folder view.
-            </p>
-            <ul class="article-list">
-              <li>View pertama menampilkan halaman perkenalan.</li>
-              <li>View kedua menampilkan halaman tentang hobi.</li>
-              <li>View ketiga menampilkan halaman tentang sekolah.</li>
-            </ul>
-            <p>
-              Dari studi kasus ini, saya belajar bahwa tampilan pada Laravel bisa dibuat lebih rapi karena
-              isi halaman dipisahkan ke file view masing-masing. Hal ini membuat project lebih mudah diatur
-              dan lebih enak dikembangkan.
-            </p>
-
-            <figure class="article-figure">
-              <img
-                src="assets/lkpd-studi-kasus-2.png"
-                alt="Screenshot LKPD studi kasus 2 Laravel tentang pembuatan 3 view berbeda dan pemanggilan view melalui route"
-                class="article-image"
-              >
-              <figcaption>
-                Screenshot hasil LKPD saya pada studi kasus 2, yaitu membuat 3 view berbeda dan memanggilkannya melalui route Laravel.
-              </figcaption>
-            </figure>
-          </section>
-
-          <section class="article-block">
-            <p class="article-kicker">Studi Kasus 3</p>
-            <h4>Analisis Cara Mengirim Data ke View</h4>
-            <p>
-              Pada studi kasus ketiga, saya mempelajari dua cara untuk mengirim data dari route ke view
-              pada Laravel. Tugas ini tidak hanya membuat saya menulis kode, tetapi juga menganalisis
-              perbedaan cara penulisan dan kelebihan masing-masing metode.
-            </p>
-            <p>
-              Cara pertama adalah mengirim data langsung melalui fungsi <strong>view()</strong> dalam bentuk array.
-              Cara ini cocok jika data yang dikirim ingin ditulis sekaligus dalam satu bagian.
-            </p>
-
-            <div class="code-example">
-              <p class="code-title">Contoh cara 1</p>
-              <pre><code>Route::get('/perkenalan', function () {
-    return view('perkenalan', [
-        'nama' => 'Hazfi',
-        'kelas' => 'XII RPL'
-    ]);
-});</code></pre>
-            </div>
-
-            <p>
-              Cara kedua adalah menggunakan <strong>with()</strong>. Dengan cara ini, data bisa dikirim satu per satu
-              dan penulisannya bisa dirangkai. Metode ini terasa lebih fleksibel jika data yang ingin dimasukkan
-              bertambah secara bertahap.
-            </p>
-
-            <div class="code-example">
-              <p class="code-title">Contoh cara 2</p>
-              <pre><code>Route::get('/perkenalan', function () {
-    return view('perkenalan')
-        ->with('nama', 'Hazfi')
-        ->with('kelas', 'XII RPL');
-});</code></pre>
-            </div>
-
-            <ul class="article-list">
-              <li>Cara pertama langsung mengirim data ke view menggunakan array di dalam fungsi <strong>view()</strong>.</li>
-              <li>Cara kedua menggunakan <strong>with()</strong> untuk menambahkan data secara berurutan.</li>
-              <li>Letak perbedaannya ada pada gaya penulisan dan fleksibilitas saat mengirim data.</li>
-            </ul>
-            <p>
-              Menurut pemahaman saya, jika data yang dikirim hanya sedikit atau ingin ditulis sekaligus,
-              cara pertama lebih sederhana dan mudah dibaca. Namun jika data ingin diatur satu per satu
-              atau ditambah bertahap, cara kedua terasa lebih rapi dan lebih fleksibel.
-            </p>
-          </section>
-
-          <section class="article-block">
-            <p class="article-kicker">Hasil Belajar</p>
-            <h4>Pemahaman yang Saya Dapatkan</h4>
-            <p>
-              Setelah mengerjakan studi kasus pertama, kedua, dan ketiga ini, saya menjadi lebih paham tentang dasar penggunaan
-              Laravel. Walaupun terlihat sederhana, latihan ini sangat membantu saya untuk mengenal alur
-              kerja framework sebelum lanjut ke materi yang lebih dalam.
-            </p>
-            <p>
-              Ke depannya, saya akan melanjutkan postingan blog ini dengan pembahasan langkah-langkah berikutnya
-              sesuai urutan tugas Laravel yang saya kerjakan.
-            </p>
-          </section>
-        </div>
-
-        <a href="#kontak" class="inline-link">Lanjut ke bagian penutup</a>
-      </article>
-    </section>
-
-    <section id="kontak" class="section closing-section">
+    <section class="section closing-section">
       <div class="section-heading">
         <p class="section-label">Penutup</p>
         <h2>Terima Kasih Sudah Berkunjung</h2>
@@ -287,7 +172,7 @@
       <div class="closing-box">
         <p>
           Semoga blog pribadi ini dapat menjadi tempat dokumentasi tugas yang baik, rapi, dan mudah dipahami.
-          Saya akan melanjutkan isi website ini dengan postingan project Laravel setelah tampilan awalnya kamu setujui.
+          Saya akan terus melengkapi isi website ini sesuai perkembangan tugas yang saya kerjakan.
         </p>
       </div>
     </section>
