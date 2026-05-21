@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi API & Studi Kasus - Blog Pribadi</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+
+    <header class="subhero">
+        <div class="topbar">
+            <div class="brand">Blog Pribadi</div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Beranda</a>
+                <a href="framework.html" class="nav-link">Framework</a>
+                <a href="migration.html" class="nav-link">Migration</a>
+                <a href="controller.html" class="nav-link">Controller</a>
+                <a href="create.html" class="nav-link">Create Data</a>
+                <a href="edit-delete.html" class="nav-link">Edit Delete</a>
+                <a href="eloquent.html" class="nav-link">Eloquent</a>
+                <a href="api.html" class="nav-link current">API</a> 
+            </nav>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="page-head">
+            <span class="eyebrow">Studi Kasus LKPD</span>
+            <h1>Implementasi API Routes Laravel (Data Kelas)</h1>
+            <p class="lead">Pembahasan lengkap mengenai pembuatan RESTful API endpoint untuk manajemen data kelas menggunakan Laravel.</p>
+        </div>
+
+        <div class="article-blocks">
+            
+            <div class="article-block">
+                <p class="article-kicker">HTTP Method: GET</p>
+                <h4>Mengambil Data Kelas (Index & Show)</h4>
+                <p>Route GET digunakan untuk mengambil data kelas dari database. Pada proyek ini, fungsi <code>index</code> dipakai untuk menampilkan semua data kelas, sedangkan fungsi <code>show</code> dipakai untuk menampilkan satu data kelas secara spesifik berdasarkan ID.</p>
+                
+                <div class="code-example">
+                    <p class="code-title">routes/api.php</p>
+                    <pre><code>Route::get('/kelas', [KelasApiController::class, 'index']);
+Route::get('/kelas/{id}', [KelasApiController::class, 'show']);</code></pre>
+                </div>
+            </div>
+
+            <div class="article-block">
+                <p class="article-kicker">HTTP Method: POST</p>
+                <h4>Menambahkan Data Kelas Baru (Store)</h4>
+                <p>Route POST digunakan untuk menambahkan data kelas baru ke dalam database. Pada route ini, fungsi <code>store</code> dipakai untuk menerima dan menyimpan data baru yang dikirimkan dari client atau aplikasi penguji seperti Postman.</p>
+                
+                <div class="code-example">
+                    <p class="code-title">routes/api.php</p>
+                    <pre><code>Route::post('/kelas', [KelasApiController::class, 'store']);</code></pre>
+                </div>
+            </div>
+
+            <div class="article-block">
+                <p class="article-kicker">HTTP Method: PUT / PATCH</p>
+                <h4>Mengubah Data Kelas (Update)</h4>
+                <p>Untuk proses pembaruan data, kita dapat menggunakan dua metode yang memiliki fungsi sedikit berbeda:</p>
+                <ul class="article-list">
+                    <li><strong>PATCH:</strong> Digunakan untuk mengubah <em>sebagian</em> data kelas yang sudah ada berdasarkan ID.</li>
+                    <li><strong>PUT:</strong> Digunakan untuk mengubah <em>seluruh</em> data kelas yang sudah ada berdasarkan ID.</li>
+                </ul>
+                <p>Kedua method ini diarahkan ke fungsi yang sama di controller, yaitu fungsi <code>update</code>.</p>
+                
+                <div class="code-example">
+                    <p class="code-title">routes/api.php</p>
+                    <pre><code>Route::patch('/kelas/{id}', [KelasApiController::class, 'update']);
+Route::put('/kelas/{id}', [KelasApiController::class, 'update']);</code></pre>
+                </div>
+            </div>
+
+            <div class="article-block">
+                <p class="article-kicker">HTTP Method: DELETE</p>
+                <h4>Menghapus Data Kelas (Destroy)</h4>
+                <p>Route DELETE digunakan untuk menghapus data kelas dari database. Route ini membutuhkan parameter berupa ID kelas target, dan akan diproses oleh fungsi <code>destroy</code> yang ada di dalam controller.</p>
+                
+                <div class="code-example">
+                    <p class="code-title">routes/api.php</p>
+                    <pre><code>Route::delete('/kelas/{id}', [KelasApiController::class, 'destroy']);</code></pre>
+                </div>
+            </div>
+
+            <div class="article-block">
+                <p class="article-kicker">Screenshot Tugas</p>
+                <h4>Bukti Screenshot Postman </h4>
+                <p>Screenshoot request GET pada POSTMAN beserta dengan hasilnya:</p>
+                
+                <figure class="article-figure">
+                    <img src="assets/ss-postman-get.png" alt="Screenshot Route API" class="article-image">
+                    <figcaption>Gambar 4.1: Konfigurasi RESTful API endpoint untuk manajemen data kelas di Laravel.</figcaption>
+                </figure>
+            </div>
+
+               
+               
+               
+               
+                <div class="article-block">
+                <p class="article-kicker">Screenshot Tugas</p>
+                <h4>Bukti Screenshot Postman </h4>
+                <p>Screenshoot request POST pada POSTMAN beserta dengan hasilnya:</p>
+
+                <figure class="article-figure">
+                    <img src="assets/ss-postman-post.png" alt="Screenshot Route API" class="article-image">
+                    <figcaption>Gambar 4.2: Konfigurasi RESTful API endpoint untuk manajemen data kelas di Laravel.</figcaption>
+                </figure>
+            </div>
+
+             <div class="article-block">
+                <p class="article-kicker">Screenshot Tugas</p>
+                <h4>Bukti Screenshot Postman </h4>
+                <p>Screenshoot request PATCH pada POSTMAN beserta dengan hasilnya:</p>
+
+                <figure class="article-figure">
+                    <img src="assets/ss-postman-patch.png" alt="Screenshot Route API" class="article-image">
+                    <figcaption>Gambar 4.3: Konfigurasi RESTful API endpoint untuk manajemen data kelas di Laravel.</figcaption>
+                </figure>
+            </div>
+
+
+             <div class="article-block">
+                <p class="article-kicker">Screenshot Tugas</p>
+                <h4>Bukti Screenshot Postman </h4>
+                <p>Screenshoot request PUT pada POSTMAN beserta dengan hasilnya:</p>
+
+                <figure class="article-figure">
+                    <img src="assets/ss-postman-put.png" alt="Screenshot Route API" class="article-image">
+                    <figcaption>Gambar 4.4: Konfigurasi RESTful API endpoint untuk manajemen data kelas di Laravel.</figcaption>
+                </figure>
+            </div>
+
+             <div class="article-block">
+                <p class="article-kicker">Screenshot Tugas</p>
+                <h4>Bukti Screenshot Postman </h4>
+                <p>Screenshoot request DELETE pada POSTMAN beserta dengan hasilnya:</p>
+
+                <figure class="article-figure">
+                    <img src="assets/ss-postman-delete.png" alt="Screenshot Route API" class="article-image">
+                    <figcaption>Gambar 4.5: Konfigurasi RESTful API endpoint untuk manajemen data kelas di Laravel.</figcaption>
+                </figure>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Blog Pribadi. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
