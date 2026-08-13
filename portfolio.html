@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio | Blog Pribadi Hazfi Febrianto</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Galeri screenshot: grid 3 kolom, gambar dibuat kecil & seragam biar rapi */
+    .portfolio-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .portfolio-gallery figure {
+      margin: 0;
+    }
+    .portfolio-gallery img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      background: #eef0f3;
+      border-radius: 10px;
+      display: block;
+      padding: 6px;
+      box-sizing: border-box;
+    }
+    .portfolio-gallery figcaption {
+      margin-top: 6px;
+      font-size: 0.85rem;
+    }
+    @media (max-width: 800px) {
+      .portfolio-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 480px) {
+      .portfolio-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="subhero">
+    <nav class="topbar">
+      <span class="brand">Blog Pribadi</span>
+            <div class="nav-menu">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="framework.html" class="nav-link">Framework</a>
+        <a href="migration.html" class="nav-link">Migration</a>
+        <a href="controller.html" class="nav-link">Controller</a>
+        <a href="create-data.html" class="nav-link">Create Data</a>
+        <a href="edit-delete.html" class="nav-link">Edit Delete</a>
+        <a href="eloquent.html" class="nav-link">Eloquent</a>
+        <a href="api.html" class="nav-link">API</a>
+        <a href="portfolio.html" class="nav-link current">Portofolio</a>
+      </div>
+    </nav>
+
+    <div class="page-head">
+      <p class="eyebrow">Portofolio Pribadi</p>
+      <h1>Portofolio Hazfi Febrianto</h1>
+      <p class="lead">
+        Halaman ini berisi ringkasan tentang diri saya, kemampuan yang sedang saya pelajari,
+        dan beberapa project yang sudah saya dokumentasikan selama belajar web development.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <article class="post-card portfolio-hero-card">
+        <div>
+          <p class="article-kicker">Tentang Saya</p>
+          <h2>Pelajar RPL yang sedang membangun jejak belajar</h2>
+          <p>
+            Perkenalkan, nama saya Hazfi Febrianto. Saya adalah siswa XI RPL 2 di SMKN 4 Bandung
+            yang sedang belajar membuat website, memahami Laravel, mengelola database, dan
+            mendokumentasikan tugas dengan rapi lewat blog pribadi ini.
+          </p>
+        </div>
+
+        <div class="portfolio-side">
+          <img src="assets/hazfi-curug.jpeg" alt="Foto Hazfi Febrianto" class="portfolio-photo">
+          <div class="portfolio-stats">
+            <div>
+              <strong>XI RPL 2</strong>
+              <span>Kelas</span>
+            </div>
+            
+            <div>
+              <strong>Web Developer</strong>
+              <span>Bidang Minat</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-label">Skill</p>
+        <h2>Keahlian yang Sedang Dipelajari</h2>
+      </div>
+
+      <div class="skill-grid">
+        <article class="card skill-card">
+          <h3>Frontend Dasar</h3>
+          <p>Membuat tampilan website menggunakan HTML, CSS, layout responsive, dan sedikit JavaScript.</p>
+        </article>
+        <article class="card skill-card">
+          <h3>Laravel</h3>
+          <p>Memahami route, controller, view, migration, Facade DB, Eloquent, dan proses CRUD.</p>
+        </article>
+        <article class="card skill-card">
+          <h3>Database</h3>
+          <p>Membuat struktur tabel, membaca data di phpMyAdmin, dan menghubungkan data ke aplikasi.</p>
+        </article>
+        <article class="card skill-card">
+          <h3>Dokumentasi</h3>
+          <p>Menyusun hasil tugas ke dalam blog supaya alurnya jelas dan mudah dibaca orang lain.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-label">Project</p>
+        <h2>Project yang Pernah Dikerjakan</h2>
+      </div>
+
+      <div class="project-grid">
+        <article class="card project-card">
+          <span>01</span>
+          <h3>Blog Pribadi Hazfi</h3>
+          <p>
+            Website blog pribadi yang saya buat ini untuk menampilkan biodata, materi Laravel, screenshot hasil tugas,
+            dan catatan pembelajaran.
+          </p>
+        </article>
+        <article class="card project-card">
+          <span>02</span>
+          <h3>CRUD Data </h3>
+          <p>
+            Project Laravel untuk menampilkan, menambah, mengedit, dan menghapus data kelas
+            menggunakan DB Facade maupun Eloquent.
+          </p>
+        </article>
+        <article class="card project-card">
+          <span>03</span>
+          <h3>Database Migration</h3>
+          <p>
+            Latihan membuat tabel baru, menambah field, mengubah panjang field, dan mengganti nama
+            kolom pada database.
+          </p>
+        </article>
+        <article class="card project-card">
+          <span>04</span>
+          <h3>RESTful API Laravel</h3>
+          <p>
+            Materi API Laravel untuk mengelola data kelas menggunakan endpoint dan HTTP method
+            seperti GET, POST, PUT, PATCH, dan DELETE.
+          </p>
+        </article>
+        <article class="card project-card">
+          <span>05</span>
+          <h3>Homecare Luka Sehat</h3>
+          <p>
+            Dokumentasi website layanan homecare untuk menampilkan informasi layanan perawatan luka
+            dengan tampilan yang rapi dan mudah dipahami.
+          </p>
+        </article>
+        <article class="card project-card">
+          <span>06</span>
+          <h3>SiPilah</h3>
+          <p>
+            Aplikasi desktop berbasis Java (NetBeans) untuk pengelolaan dan pemilahan sampah
+            dengan sistem poin dan reward bagi warga.
+          </p>
+        </article>
+        <article class="card project-card">
+          <span>07</span>
+          <h3>PortoEdu</h3>
+          <p>
+            Aplikasi web EdTech berbasis Laravel untuk menyimpan, memverifikasi, dan menampilkan
+            portofolio digital siswa. Project ini masih dalam tahap pengembangan.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <article class="post-card featured-project">
+        <div class="section-heading">
+          <p class="section-label">Dokumentasi Project</p>
+          <h2>Website Homecare Luka Sehat</h2>
+        </div>
+
+        <p>
+          Homecare Luka Sehat adalah project tugas sekolah website yang berisi informasi layanan perawatan luka.
+          Di portofolio ini, saya menampilkan beberapa dokumentasi tampilan website sebagai bukti
+          proses dan hasil project yang sudah pernah saya kerjakan.
+        </p>
+
+        <div class="portfolio-gallery">
+          <figure>
+            <img src="assets/projek-homecare%20(1).png" alt="Dokumentasi tampilan pertama website Homecare Luka Sehat">
+            <figcaption>Tampilan awal website Homecare Luka Sehat.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-homecare%20(2).png" alt="Dokumentasi tampilan kedua website Homecare Luka Sehat">
+            <figcaption>Bagian informasi layanan yang ditampilkan di website.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-homecare%20(3).png" alt="Dokumentasi tampilan ketiga website Homecare Luka Sehat">
+            <figcaption>Dokumentasi tampilan lanjutan pada halaman project.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-homecare%20(4).png" alt="Dokumentasi tampilan keempat website Homecare Luka Sehat">
+            <figcaption>Bagian akhir dokumentasi tampilan website.</figcaption>
+          </figure>
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <article class="post-card featured-project">
+        <div class="section-heading">
+          <p class="section-label">Dokumentasi Project</p>
+          <h2>Aplikasi SiPilah</h2>
+        </div>
+
+        <p>
+          SiPilah merupakan aplikasi berbasis web yang dirancang untuk membantu meminimalisir
+          permasalahan sampah melalui sistem pengelolaan dan pemilahan sampah yang terintegrasi.
+          Aplikasi ini dikembangkan menggunakan bahasa pemrograman Java dengan NetBeans sebagai
+          IDE (Integrated Development Environment).
+        </p>
+        <p>
+          SiPilah memiliki tiga jenis pengguna, yaitu Admin, Petugas, dan Warga, yang memiliki
+          peran masing-masing dalam proses pengelolaan sampah. Petugas bertugas melakukan
+          pendataan dan pengecekan sampah warga, sedangkan Warga dapat memperoleh poin sebagai
+          reward dari hasil pemilahan sampah. Poin yang telah dikumpulkan kemudian dapat
+          ditukarkan dengan sembako yang disediakan oleh Admin.
+        </p>
+        <p>
+          Melalui sistem ini, SiPilah diharapkan dapat meningkatkan kesadaran masyarakat dalam
+          memilah sampah sekaligus memberikan motivasi melalui sistem reward, sehingga
+          pengelolaan sampah dapat dilakukan dengan lebih baik dan terorganisir.
+        </p>
+
+        <div class="portfolio-gallery">
+          <figure>
+            <img src="assets/projek-sipilah (2).jpeg" alt="Dokumentasi tampilan kedua aplikasi SiPilah">
+            <figcaption>Tampilan awal sipilah halaman login untuk Admin, Petugas, dan Warga.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-sipilah (3).jpeg" alt="Dokumentasi tampilan ketiga aplikasi SiPilah">
+            <figcaption>Dashboard tampilan saat login admin dan pendataan dan pengecekan sampah oleh Admin.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-sipilah (4).jpeg" alt="Dokumentasi tampilan keempat aplikasi SiPilah">
+            <figcaption>tampilan halaman awal dashboard petugas saat login menjadi petugas.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-sipilah (5).jpeg" alt="Dokumentasi tampilan kelima aplikasi SiPilah">
+            <figcaption>tampilan halaman awal dashboard warga saat login menjadi warga.</figcaption>
+          </figure>
+           <figure>
+            <img src="assets/projek-sipilah (1).jpeg" alt="Dokumentasi tampilan pertama aplikasi SiPilah">
+            <figcaption>Tampilan Data warga.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-sipilah (6).jpeg" alt="Dokumentasi tampilan keenam aplikasi SiPilah">
+            <figcaption>Tampilan lanjutan dari fitur pengelolaan data pada aplikasi SiPilah.</figcaption>
+          </figure>
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <article class="post-card featured-project">
+        <div class="section-heading">
+          <p class="section-label">Dokumentasi Project · Sedang Dikembangkan</p>
+          <h2>PortoEdu — Digital Student Portfolio</h2>
+        </div>
+
+        <p>
+          PortoEdu adalah aplikasi web bertema EdTech yang saya kembangkan bersama kelompok
+          untuk membantu siswa menyimpan, mengelola, dan menampilkan seluruh pencapaian
+          sekolah mereka dalam satu portofolio digital. Prestasi, sertifikat, proyek,
+          organisasi, hingga dokumentasi kegiatan yang biasanya tersebar di banyak tempat
+          bisa dikumpulkan dalam satu akun siswa, lalu diverifikasi langsung oleh guru
+          sebelum ditampilkan sebagai portofolio resmi.
+        </p>
+
+        <h3>Peran Pengguna</h3>
+        <ul class="feature-list">
+          <li><strong>Admin</strong> — mengelola data siswa, guru, kelas, jurusan, akun, dan melihat statistik sistem secara keseluruhan.</li>
+          <li><strong>Guru</strong> — memeriksa dan memverifikasi prestasi maupun sertifikat yang diunggah siswa, lengkap dengan catatan persetujuan atau penolakan.</li>
+          <li><strong>Siswa</strong> — mengisi profil, menambahkan prestasi, sertifikat, proyek, organisasi, dan ekstrakurikuler, lalu membagikan portofolionya.</li>
+        </ul>
+
+        <h3>Fitur Utama</h3>
+        <ul class="feature-list">
+          <li><strong>Dashboard</strong> — ringkasan jumlah prestasi, sertifikat, proyek, dan progres kelengkapan portofolio.</li>
+          <li><strong>Profil Siswa</strong> — halaman profil berisi data diri, NIS, kelas, dan statistik pencapaian.</li>
+          <li><strong>Prestasi &amp; Sertifikat Digital</strong> — pengajuan prestasi dan upload sertifikat yang berstatus menunggu hingga terverifikasi oleh guru.</li>
+          <li><strong>Proyek/Karya</strong> — dokumentasi hasil karya siswa lengkap dengan deskripsi dan teknologi yang digunakan.</li>
+          <li><strong>Organisasi &amp; Ekstrakurikuler</strong> — catatan pengalaman non-akademik seperti OSIS dan kegiatan ekstrakurikuler.</li>
+          <li><strong>QR Code &amp; Export PDF</strong> — portofolio siswa dapat dibagikan lewat QR code atau diunduh dalam bentuk dokumen PDF.</li>
+        </ul>
+
+        <h3>Teknologi</h3>
+        <p>
+          Dibangun menggunakan Laravel dan Laravel Blade sebagai backend dan frontend,
+          Bootstrap 5 untuk tampilan antarmuka, MySQL sebagai database, DomPDF untuk fitur
+          export PDF, serta Git dan GitHub untuk version control.
+        </p>
+
+        <div class="portfolio-gallery">
+          <figure>
+            <img src="assets/projek-portoedu (1).jpeg" alt="Landing page PortoEdu">
+            <figcaption>Landing page PortoEdu yang memperkenalkan platform ke pengunjung.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-portoedu (2).jpeg" alt="Dashboard siswa PortoEdu">
+            <figcaption>Dashboard siswa berisi ringkasan prestasi, project, sertifikat, dan progres portofolio.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-portoedu (4).jpeg" alt="Halaman profil siswa PortoEdu">
+            <figcaption>Halaman profil siswa dengan data pribadi dan statistik pencapaian.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-portoedu (5).jpeg" alt="Halaman prestasi siswa PortoEdu">
+            <figcaption>Halaman prestasi siswa beserta status verifikasinya.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-portoedu (6).jpeg" alt="Dashboard guru PortoEdu">
+            <figcaption>Dashboard guru untuk memantau menu verifikasi dan review project siswa.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/projek-portoedu (3).jpeg" alt="Halaman verifikasi portofolio oleh guru PortoEdu">
+            <figcaption>Halaman verifikasi guru untuk meninjau dan menyetujui prestasi serta sertifikat siswa.</figcaption>
+          </figure>
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="section-label">Kontak</p>
+        <h2>Informasi Singkat</h2>
+      </div>
+
+      <div class="closing-box contact-strip">
+        <p><strong>Nama:</strong> Hazfi Febrianto</p>
+        <p><strong>Sekolah:</strong> SMKN 4 Bandung</p>
+        <p><strong>Minat:</strong> Game &amp; Web Development</p>
+        <p><strong>GitHub:</strong> hazz713</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Blog Pribadi Hazfi Febrianto</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
